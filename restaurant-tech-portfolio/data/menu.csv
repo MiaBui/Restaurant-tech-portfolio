@@ -1,0 +1,6 @@
+item_id,name,category,base_price_usd,required_modifier,optional_modifier,addon_price_usd,station
+M01,Banh Mi,Food,12.00,Protein: chicken OR pork OR tofu,Spice: mild OR spicy; extra protein,3.00,Kitchen
+M02,Kaya Toast,Food,8.00,,,0.00,Kitchen
+M03,Breakfast Croissant,Food,10.00,Protein: egg OR tofu,,0.00,Kitchen
+M04,Vietnamese Coffee,Drinks,5.00,Temperature: hot OR iced,,0.00,Beverage
+M05,Matcha Latte,Drinks,6.00,Temperature: hot OR iced,,0.00,Beverage

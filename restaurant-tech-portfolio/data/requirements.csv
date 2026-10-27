@@ -1,0 +1,9 @@
+id,requirement,priority,acceptance_criterion,test_id
+R01,Distinguish dine-in and takeout,Must,Order record shows selected service type,T01
+R02,Require one Banh Mi protein,Must,Missing protein blocks item completion,T02
+R03,Charge extra protein consistently,Must,12 USD base plus 3 USD add-on equals 15 USD before tax,T03
+R04,Route food to kitchen,Must,Food ticket appears only at intended food station,T04
+R05,Route drinks to beverage station,Must,Drink ticket appears at beverage station,T05
+R06,Restrict void permission,Must,Unauthorized role cannot complete a void,T06
+R07,Show modifiers on prep ticket,Must,Selected protein and spice appear on ticket,T07
+R08,Support split checks,Should,Split preserves total before tax and gratuity,T08

@@ -1,0 +1,9 @@
+test_id,requirement_id,scenario,expected_result,actual_result,status
+T01,R01,Create one dine-in and one takeout order,Each displays correct service type,,Not executed
+T02,R02,Add Banh Mi without protein,Required choice prevents completion,,Not executed
+T03,R03,Add extra protein to 12 USD Banh Mi,15 USD before tax,,Not executed
+T04,R04,Submit food item in authorized test environment,Food reaches kitchen station,,Not executed
+T05,R05,Submit coffee in authorized test environment,Coffee reaches beverage station,,Not executed
+T06,R06,Attempt void using unauthorized role,Action blocked or authorized approval required,,Not executed
+T07,R07,Order chicken Banh Mi with spicy modifier,Ticket lists chicken and spicy,,Not executed
+T08,R08,Split two items onto separate checks,Combined subtotal equals original subtotal,,Not executed
