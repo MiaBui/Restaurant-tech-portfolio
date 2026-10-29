@@ -146,6 +146,126 @@ h1 em{font-weight:normal}
 .connect{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center;padding:65px 0 45px;border-top:1px solid var(--green);margin-top:65px}.connect p{max-width:520px;font-size:15px;line-height:1.8}.connect .section-sticker{font-size:clamp(22px,2.7vw,33px);background:var(--peach);margin-top:25px}.connect-links{display:flex;flex-direction:column;gap:25px;font:14px monospace;text-underline-offset:6px}
 @media(max-width:760px){.container{padding:0 20px}nav{align-items:flex-start;gap:18px}.links{flex-wrap:wrap;justify-content:flex-end;gap:12px;font-size:10px}.hero{grid-template-columns:1fr;padding:45px 0;gap:35px}.hero-collage{min-height:420px;padding:65px 30px 60px}.name-sticker{font-size:36px;margin-bottom:30px}.about{gap:25px;padding:40px 0}.story-heading h2{font-size:30px}.skill-grid,.connect{grid-template-columns:1fr;gap:30px}.skill-grid{padding-top:5px}.project-heading{align-items:flex-start}.connect{padding:40px 0}.brand{white-space:nowrap;font-size:19px}.paper-ticket{max-width:300px}.mini-sticker{font-size:20px}.hero-asterisk{font-size:48px}.section-sticker{font-size:25px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  /* ===== MY STORY: POLAROID PHOTOS ===== */
+
+.story-heading {
+  min-width: 0;
+}
+
+.story-photos {
+  display: grid;
+  gap: 36px;
+  width: 100%;
+  max-width: 360px;
+  margin: 40px auto 0;
+  padding: 12px 18px 24px;
+}
+
+.story-photo {
+  position: relative;
+  width: 92%;
+  margin: 0;
+  padding: 12px 12px 20px;
+  background: #fffdf7;
+  border: 1px solid #dfdfd2;
+  box-shadow: 0 10px 24px rgba(23, 62, 48, 0.13);
+}
+
+/* A small piece of peach-colored tape */
+.story-photo::before {
+  content: "";
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  width: 80px;
+  height: 25px;
+  background: rgba(237, 201, 179, 0.8);
+  transform: translateX(-50%) rotate(5deg);
+  z-index: 1;
+}
+
+.story-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+}
+
+/* Alternate angles without overlapping the timeline */
+.story-photo-one {
+  justify-self: start;
+  transform: rotate(-4deg);
+}
+
+.story-photo-two {
+  justify-self: end;
+  transform: rotate(4deg);
+}
+
+.story-photo-three {
+  justify-self: start;
+  transform: rotate(-3deg);
+}
+
+.story-photo figcaption {
+  padding: 15px 4px 0;
+  color: #173e30;
+}
+
+.story-photo figcaption strong {
+  display: block;
+  font-family: Georgia, serif;
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 1.3;
+}
+
+.story-photo figcaption span {
+  display: block;
+  margin-top: 6px;
+  font-family: monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #596656;
+}
+
+/* Tablet: three photos side by side */
+@media (min-width: 501px) and (max-width: 760px) {
+  .story-photos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    max-width: none;
+    padding: 12px 10px 24px;
+  }
+
+  .story-photo {
+    width: 100%;
+    padding: 7px 7px 14px;
+  }
+
+  .story-photo::before {
+    width: 45px;
+    height: 18px;
+    top: -8px;
+  }
+
+  .story-photo figcaption strong {
+    font-size: 15px;
+  }
+
+  .story-photo figcaption span {
+    font-size: 10px;
+  }
+}
+
+/* Phone: a compact vertical photo column */
+@media (max-width: 500px) {
+  .story-photos {
+    max-width: 290px;
+    gap: 30px;
+    margin-top: 30px;
+  }
+}
 </style>
 </head>
 <body>
@@ -181,7 +301,47 @@ h1 em{font-weight:normal}
 
 <main>
 <section class="about" id="about" aria-labelledby="story-title">
-<div class="story-heading"><div class="section-sticker">MY <strong>STORY</strong> <span aria-hidden="true">☺</span></div><h2 id="story-title">I studied code.<br>I learned to ask better questions on the restaurant floor.</h2><p class="story-intro">Different restaurants. Different workflows. A growing curiosity about the data behind every order.</p><a class="textlink" href="https://www.linkedin.com/in/nguyen-thien-huong-bui-41b089308/">Follow my journey on LinkedIn ↗</a></div>
+<div class="story-heading"><div class="section-sticker">MY <strong>STORY</strong> <span aria-hidden="true">☺</span></div><h2 id="story-title">I studied code.<br>I learned to ask better questions on the restaurant floor.</h2><p class="story-intro">Different restaurants. Different workflows. A growing curiosity about the data behind every order.</p><a class="textlink" href="https://www.linkedin.com/in/nguyen-thien-huong-bui-41b089308/">Follow my journey on LinkedIn ↗</a>
+<!-- Photos in the left column of My Story -->
+<div class="story-photos" aria-label="My restaurant journey in photos">
+
+  <figure class="story-photo story-photo-one">
+    <img
+      src="images/chucks.HEIC"
+      alt="Mia at Chuck’s Roadhouse with two people"
+      loading="lazy"
+    >
+    <figcaption>
+      <strong>Chuck’s Roadhouse</strong>
+      <span>The people behind the service.</span>
+    </figcaption>
+  </figure>
+
+  <figure class="story-photo story-photo-two">
+    <img
+      src="images/IMG_1.JPG"
+      alt="Mia wearing her Pür & Simple uniform"
+      loading="lazy"
+    >
+    <figcaption>
+      <strong>Breakfast shifts</strong>
+      <span>A different pace. More to learn.</span>
+    </figcaption>
+  </figure>
+
+  <figure class="story-photo story-photo-three">
+    <img
+      src="images/IMG_2.JPG"
+      alt="Mia in her restaurant uniform wearing festive antlers"
+      loading="lazy"
+    >
+    <figcaption>
+      <strong>Everyday moments</strong>
+      <span>Small moments along the way.</span>
+    </figcaption>
+  </figure>
+
+</div></div>
 <div class="journey">
 <article class="journey-step"><span class="journey-label">01 / 2021 — A new beginning</span><h3>Canada, Computer Science, and my first restaurant job.</h3><p>I came to Canada in 2021 to study Computer Science at Lakehead University. Alongside my studies, I started working part-time at a Vietnamese restaurant. While learning about software in class, I was also learning how people, orders, and information move through a restaurant.</p></article>
 <article class="journey-step"><span class="journey-label">02 / Learning through different restaurants</span><h3>One industry, many ways of working.</h3><p>I later had opportunities to work in Japanese restaurants, at Chuck’s, and in breakfast service at Pür &amp; Simple. Each environment had its own menu, pace, service expectations, and coordination needs. Those experiences helped me see why restaurant software needs to fit the workflow of the people using it.</p></article>
