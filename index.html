@@ -81,6 +81,13 @@ h1{letter-spacing:-1px}
 .about{gap:20px;padding:45px 0}
 h2{font-size:29px}
 }
+.ticket.sweet {
+  background: #fae9ee;
+}
+
+.tickets {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
 </style>
 </head>
 <body>
@@ -130,12 +137,12 @@ h2{font-size:29px}
     style="padding:10px;width:100%;border:1px solid #d9ddd4;border-radius:6px"
   >
 
-  <label for="configStation">Bánh Mì preparation station</label>
   <select id="configStation">
-    <option value="KITCHEN">Kitchen</option>
-    <option value="BEVERAGE">Beverage</option>
+  <option value="KITCHEN">Savory Kitchen — Bếp mặn</option>
+  <option value="SWEET">Sweet Kitchen — Bếp ngọt</option>
+  <option value="BEVERAGE">Beverage — Quầy nước</option>
   </select>
-
+  
   <button id="saveConfig" type="button" style="margin-top:15px">
     Apply configuration
   </button>
@@ -180,12 +187,58 @@ h2{font-size:29px}
 </div>
 
 <div class="item clearfix">
-<div class="foodicon coffee" aria-hidden="true">☕</div>
-<div class="item-top"><span>Vietnamese Coffee</span><span>$5</span></div>
-<p class="small">Iced · Beverage station</p>
-<button id="addCoffee" type="button">Add to order</button>
+  <div class="foodicon" aria-hidden="true">🥞</div>
+  <div class="item-top">
+    <span>Pancake</span><span>$10</span>
+  </div>
+  <p class="small">Choose your topping · Sweet Kitchen</p>
+
+  <label for="pancakeTopping">Topping — required</label>
+  <select id="pancakeTopping">
+    <option value="">Choose one topping…</option>
+    <option value="plain">Plain — included</option>
+    <option value="banana">Banana +$1</option>
+    <option value="berries">Mixed berries +$2</option>
+    <option value="matcha">Matcha cream +$2</option>
+  </select>
+
+  <label for="pancakeSyrup">Syrup</label>
+  <select id="pancakeSyrup">
+    <option>Maple syrup</option>
+    <option>Chocolate sauce</option>
+    <option>No syrup</option>
+  </select>
+
+  <label>
+    <input id="extraPancake" type="checkbox">
+    Extra pancake +$3
+  </label>
+
+  <button id="addPancake" type="button">Add to order</button>
 </div>
-<div class="status" id="status" role="status" aria-live="polite"></div>
+
+<div class="item clearfix">
+  <div class="foodicon coffee" aria-hidden="true">☕</div>
+  <div class="item-top">
+    <span>Vietnamese Coffee</span><span>$5</span>
+  </div>
+  <p class="small">Customize your drink · Beverage station</p>
+
+  <label for="coffeeSweetness">Sweetness</label>
+  <select id="coffeeSweetness">
+    <option>Regular sweetness</option>
+    <option>Less sweet</option>
+    <option>No condensed milk</option>
+  </select>
+
+  <label for="coffeeIce">Ice level</label>
+  <select id="coffeeIce">
+    <option>Regular ice</option>
+    <option>Less ice</option>
+    <option>No ice</option>
+  </select>
+
+  <button id="addCoffee" type="button">Add to order</button>
 </div>
 
 <div class="panel">
@@ -237,9 +290,12 @@ function applyConfiguration() {
   el('extraLabel').textContent =
     'Extra protein +' + money(config.extraPrice);
 
-  const stationName =
-    config.foodStation === 'KITCHEN' ? 'Kitchen' : 'Beverage';
-
+ const stationName = {
+  KITCHEN: 'Savory Kitchen',
+  SWEET: 'Sweet Kitchen',
+  BEVERAGE: 'Beverage'
+}[config.foodStation];
+  
   el('foodRouting').textContent =
     'Protein selection required · ' + stationName;
 
@@ -272,8 +328,11 @@ el('saveConfig').onclick = () => {
 
   applyConfiguration();
 
-  const stationName =
-    config.foodStation === 'KITCHEN' ? 'Kitchen' : 'Beverage';
+ const stationName = {
+  KITCHEN: 'Savory Kitchen',
+  SWEET: 'Sweet Kitchen',
+  BEVERAGE: 'Beverage'
+}[config.foodStation];
 
   el('configStatus').textContent =
     'Applied: extra protein ' + money(config.extraPrice) +
@@ -337,10 +396,55 @@ cart.push({
 el('status').textContent='Bánh Mì added with your selected modifiers.';
 };
 
-el('addCoffee').onclick=()=>{
-cart.push({name:'Vietnamese Coffee',modifier:'Iced',price:500,station:'BEVERAGE'});
-render();
-el('status').textContent='Iced coffee added for the beverage station.';
+const pancakeToppings = {
+  plain:   { label: 'Plain', price: 0 },
+  banana:  { label: 'Banana', price: 100 },
+  berries: { label: 'Mixed berries', price: 200 },
+  matcha:  { label: 'Matcha cream', price: 200 }
+};
+
+el('addPancake').onclick = () => {
+  const topping = pancakeToppings[el('pancakeTopping').value];
+
+  if (!topping) {
+    el('status').textContent =
+      'Please choose a topping before adding Pancake.';
+    el('pancakeTopping').focus();
+    return;
+  }
+
+  const extra = el('extraPancake').checked;
+
+  cart.push({
+    name: 'Pancake',
+    modifier: [
+      topping.label,
+      el('pancakeSyrup').value,
+      ...(extra ? ['Extra pancake'] : [])
+    ].join(' · '),
+    price: 1000 + topping.price + (extra ? 300 : 0),
+    station: 'SWEET'
+  });
+
+  render();
+  el('status').textContent =
+    'Pancake added for the Sweet Kitchen.';
+};
+
+el('addCoffee').onclick = () => {
+  cart.push({
+    name: 'Vietnamese Coffee',
+    modifier: [
+      el('coffeeSweetness').value,
+      el('coffeeIce').value
+    ].join(' · '),
+    price: 500,
+    station: 'BEVERAGE'
+  });
+
+  render();
+  el('status').textContent =
+    'Coffee added with your selected sweetness and ice.';
 };
 
 el('service').onchange=()=>{
@@ -354,15 +458,25 @@ el('status').textContent='Add at least one item before sending.';
 return;
 }
 el('tickets').replaceChildren();
-['KITCHEN','BEVERAGE'].forEach(station=>{
+['KITCHEN', 'SWEET', 'BEVERAGE'].forEach(station => {
 const items=cart.filter(item=>item.station===station);
 if(!items.length)return;
 const ticket=document.createElement('div');
-ticket.className='ticket'+(station==='BEVERAGE'?' beverage':'');
-ticket.textContent=station+'\n'+el('service').value+'\n\n'+items.map(item=>'1 × '+item.name+'\n'+item.modifier).join('\n\n');
-el('tickets').append(ticket);
-});
-el('status').textContent='Simulated tickets generated. No real order has been sent.';
+ticket.className = 'ticket' +
+  (station === 'BEVERAGE' ? ' beverage' : '') +
+  (station === 'SWEET' ? ' sweet' : '');
+const stationTitle = {
+  KITCHEN: 'SAVORY KITCHEN / BẾP MẶN',
+  SWEET: 'SWEET KITCHEN / BẾP NGỌT',
+  BEVERAGE: 'BEVERAGE / QUẦY NƯỚC'
+}[station];
+
+ticket.textContent =
+  stationTitle + '\n' +
+  el('service').value + '\n\n' +
+  items.map(item =>
+    '1 × ' + item.name + '\n' + item.modifier
+  ).join('\n\n');
 };
 
 el('reset').onclick=()=>{
@@ -372,6 +486,11 @@ el('extra').checked=false;
 el('service').selectedIndex=0;
 render();
 el('status').textContent='Order cleared.';
+el('pancakeTopping').value = '';
+el('pancakeSyrup').selectedIndex = 0;
+el('extraPancake').checked = false;
+el('coffeeSweetness').selectedIndex = 0;
+el('coffeeIce').selectedIndex = 0;
 };
 
 const content={
