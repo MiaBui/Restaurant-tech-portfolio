@@ -266,6 +266,84 @@ h1 em{font-weight:normal}
     margin-top: 30px;
   }
 }
+  /* SALES REPORT → INSIGHTS */
+
+.insight-idea {
+  margin: 35px 0 20px;
+  padding: 26px;
+  background: #f0f2e8;
+  border: 1px solid #173e30;
+  color: #173e30;
+}
+
+.insight-idea .idea-label {
+  font: 11px/1.6 monospace;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.insight-idea h3 {
+  margin: 16px 0;
+  font: 32px/1.15 Georgia, serif;
+}
+
+.insight-idea p {
+  margin: 12px 0;
+  color: #48594d;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.insight-idea .idea-flow {
+  margin: 24px 0;
+  padding: 14px 0;
+  border-top: 1px dashed #a7b39e;
+  border-bottom: 1px dashed #a7b39e;
+  font: 11px/1.8 monospace;
+  letter-spacing: 0.5px;
+  overflow-wrap: anywhere;
+}
+
+.insight-idea details {
+  padding: 18px 0;
+  border-top: 1px solid #bdc7b5;
+}
+
+.insight-idea summary {
+  cursor: pointer;
+  margin-left: 16px;
+  font: bold 13px/1.6 monospace;
+}
+
+.insight-idea summary:focus-visible {
+  outline: 2px solid #173e30;
+  outline-offset: 5px;
+}
+
+.insight-idea .idea-tag {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 7px 9px;
+  background: #fffdf7;
+  border: 1px solid #c9cdbd;
+  font: 10px/1.6 monospace;
+  letter-spacing: 0.4px;
+}
+
+.insight-idea .idea-note {
+  margin-top: 20px;
+  font: 11px/1.8 monospace;
+}
+
+@media (max-width: 500px) {
+  .insight-idea {
+    padding: 20px;
+  }
+
+  .insight-idea h3 {
+    font-size: 27px;
+  }
+}
 </style>
 </head>
 <body>
@@ -346,7 +424,106 @@ h1 em{font-weight:normal}
 <article class="journey-step"><span class="journey-label">01 / 2021 — A new beginning</span><h3>Canada, Computer Science, and my first restaurant job.</h3><p>I came to Canada in 2021 to study Computer Science at Lakehead University. Alongside my studies, I started working part-time at a Vietnamese restaurant. While learning about software in class, I was also learning how people, orders, and information move through a restaurant.</p></article>
 <article class="journey-step"><span class="journey-label">02 / Learning through different restaurants</span><h3>One industry, many ways of working.</h3><p>I later had opportunities to work in Japanese restaurants, at Chuck’s, and in breakfast service at Pür &amp; Simple. Each environment had its own menu, pace, service expectations, and coordination needs. Those experiences helped me see why restaurant software needs to fit the workflow of the people using it.</p></article>
 <article class="journey-step"><span class="journey-label">03 / Connecting service with data</span><h3>An order is also a source of questions.</h3><p>I began to see the orders I handled every day as potential data: what guests choose, which modifications they request, and how information reaches the right station. With the right records and analysis, those details could help us understand recurring needs and opportunities to improve service.</p><p>Which modifiers are requested most often? Where do order changes create confusion? What information would help staff coordinate more clearly? These are the questions I want to investigate.</p></article>
-<article class="journey-step"><span class="journey-label">04 / What I’m building now</span><h3>From observations to small, testable solutions.</h3><p>With a BSc in Computer Science and hands-on restaurant experience, I’m building an independent Restaurant Tech portfolio. My first prototype explores item-specific modifiers, configurable pricing, and separate savory, sweet, and beverage station tickets.</p><p>Next, I want to document service problems, turn them into requirements, build and test possible solutions, and use data to evaluate what helps. I’m developing toward opportunities in business analysis, implementation, and restaurant technology support.</p><p class="note">The current project uses fictional café data. The analysis and workflow improvements described here are areas I’m exploring; no live restaurant deployment or measured business impact is claimed.</p></article>
+<article class="journey-step"><span class="journey-label">04 / What I’m building now</span><h3>From observations to small, testable solutions.</h3><p>With a BSc in Computer Science and hands-on restaurant experience, I’m building an independent Restaurant Tech portfolio. My first prototype explores item-specific modifiers, configurable pricing, and separate savory, sweet, and beverage station tickets.</p><p>Next, I want to document service problems, turn them into requirements, build and test possible solutions, and use data to evaluate what helps. I’m developing toward opportunities in business analysis, implementation, and restaurant technology support.</p>
+  <p class="note">The current project uses fictional café data. The analysis and workflow improvements described here are areas I’m exploring; no live restaurant deployment or measured business impact is claimed.</p></article><!-- MY IDEA: FROM SALES REPORTS TO USEFUL INSIGHTS -->
+
+<aside class="insight-idea" aria-labelledby="insight-idea-title">
+
+  <div class="idea-label">
+    An idea I’m exploring / From service to insight
+  </div>
+
+  <h3 id="insight-idea-title">
+    A sales report can start<br>
+    a better conversation.
+  </h3>
+
+  <p>
+    I want to turn sales reports into practical insights
+    that help servers make relevant recommendations
+    and help restaurants plan ahead.
+  </p>
+
+  <div class="idea-flow">
+    SALES REPORTS → PATTERNS → INSIGHTS → BETTER DECISIONS
+  </div>
+
+  <details open>
+    <summary>
+      FOR SERVERS / Recommend with confidence
+    </summary>
+
+    <p>
+      Explore which dishes, drinks and add-ons are often
+      ordered together, then turn those patterns into
+      useful upselling options staff can understand
+      and use during service.
+    </p>
+
+    <p>
+      The aim is to support a higher average check per
+      guest through relevant suggestions that fit the
+      guest’s preferences, availability and experience.
+    </p>
+
+    <span class="idea-tag">
+      PAIRINGS · ADD-ONS · AVERAGE CHECK PER GUEST
+    </span>
+  </details>
+
+  <details open>
+    <summary>
+      FOR THE BUSINESS / Plan with context
+    </summary>
+
+    <p>
+      Explore how demand changes by day, service period
+      and season to identify emerging trends and support
+      forecasting.
+    </p>
+
+    <p>
+      Combine those patterns with recipes, current stock,
+      waste and supplier lead times to inform preparation
+      quantities and inventory decisions.
+    </p>
+
+    <span class="idea-tag">
+      DEMAND TRENDS · PREP PLANNING · INVENTORY
+    </span>
+  </details>
+
+  <details>
+    <summary>
+      AI &amp; MACHINE LEARNING / A direction to explore
+    </summary>
+
+    <p>
+      AI could help turn verified findings into a clear
+      pre-shift brief. Machine learning could help forecast
+      demand from enough relevant historical data, with
+      performance checked against a simple baseline.
+    </p>
+
+    <p>
+      Staff and managers would review recommendations
+      before acting. These are planned ideas, not connected
+      AI features or a trained forecasting model.
+    </p>
+
+    <span class="idea-tag">
+      CONCEPT / TO BUILD AND VALIDATE
+    </span>
+  </details>
+
+  <p class="idea-note">
+    My goal: connect everyday restaurant experience
+    with data analysis, then test whether the insights
+    help staff and the business. No sales increase
+    or forecasting accuracy is claimed.
+  </p>
+
+</aside>
 </div>
 </section>
 <section class="story-bridge" aria-labelledby="bridge-title"><div class="eyebrow">My approach</div><h2 id="bridge-title">Observe a problem. Build a response. Check what changes.</h2><p>Each project starts with a service question, makes the requirements visible, and separates what the prototype demonstrates from what still needs testing.</p></section>
